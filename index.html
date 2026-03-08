@@ -90,20 +90,30 @@
     </div>
 
     <div class="message-content" id="message">
-        <h2>🌸 Chúc mừng ngày 8/3! 🌸</h2>
-        <p>Nhân ngày Quốc tế Phụ nữ, chúc tất cả các bạn nữ lớp 11A5 luôn xinh đẹp, rạng rỡ và tràn ngập niềm vui.</p>
-        <p>Cảm ơn các bạn vì đã luôn là những mảnh ghép tuyệt vời nhất của tập thể lớp chúng ta. Chúc các bạn một ngày 8/3 thật đáng nhớ!</p>
+        <h2 id="greeting">🌸 Chúc mừng ngày 8/3! 🌸</h2>
+        <p id="bodyText">Nhân ngày Quốc tế Phụ nữ, chúc bạn luôn xinh đẹp, rạng rỡ và tràn ngập niềm vui.</p>
+        <p>Cảm ơn bạn vì đã luôn là một mảnh ghép tuyệt vời của tập thể lớp chúng ta. Chúc bạn một ngày 8/3 thật đáng nhớ!</p>
         <p style="font-weight: bold; color: #ff4d6d; margin-top: 30px; font-size: 20px;">- Từ các bạn nam 11A5 -</p>
     </div>
 
     <script>
         function openCard() {
-            // 1. Ẩn bì thư, hiện lời chúc
+            // Lấy tên từ đường link (ví dụ: ?ten=An)
+            const urlParams = new URLSearchParams(window.location.search);
+            const tenBanNu = urlParams.get('ten');
+
+            // Nếu có tên trên link, tự động đổi lời chào
+            if (tenBanNu) {
+                document.getElementById('greeting').innerText = `🌸 Chúc mừng 8/3, ${tenBanNu}! 🌸`;
+                document.getElementById('bodyText').innerText = `Nhân ngày Quốc tế Phụ nữ, chúc ${tenBanNu} luôn xinh đẹp, rạng rỡ và tràn ngập niềm vui.`;
+            }
+
+            // Ẩn bì thư, hiện lời chúc
             document.getElementById('envelope').style.display = 'none';
             document.getElementById('message').style.display = 'block';
 
-            // 2. Kích hoạt hiệu ứng pháo hoa
-            var duration = 3 * 1000; // Pháo hoa nổ trong 3 giây
+            // Kích hoạt hiệu ứng pháo hoa
+            var duration = 3 * 1000;
             var animationEnd = Date.now() + duration;
             var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
 
@@ -117,11 +127,7 @@
                     return clearInterval(interval);
                 }
                 var particleCount = 50 * (timeLeft / duration);
-                // Bắn từ 2 bên mép màn hình
                 confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } }));
                 confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
             }, 250);
         }
-    </script>
-</body>
-</html>
