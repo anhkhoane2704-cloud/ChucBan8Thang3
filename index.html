@@ -17,7 +17,6 @@
             overflow: hidden;
         }
 
-        /* Bì thư ban đầu */
         .card-container {
             position: relative;
             cursor: pointer;
@@ -45,9 +44,8 @@
             font-size: 22px;
         }
 
-        /* Nội dung lời chúc bên trong */
         .message-content {
-            display: none; /* Ẩn đi lúc đầu */
+            display: none;
             background: rgba(255, 255, 255, 0.95);
             padding: 40px;
             border-radius: 20px;
@@ -98,11 +96,11 @@
 
     <script>
         function openCard() {
-            // Lấy tên từ đường link (ví dụ: ?ten=An)
+            // Lấy tên từ đường link
             const urlParams = new URLSearchParams(window.location.search);
             const tenBanNu = urlParams.get('ten');
 
-            // Nếu có tên trên link, tự động đổi lời chào
+            // Đổi lời chào nếu có tên trên link
             if (tenBanNu) {
                 document.getElementById('greeting').innerText = `🌸 Chúc mừng 8/3, ${tenBanNu}! 🌸`;
                 document.getElementById('bodyText').innerText = `Nhân ngày Quốc tế Phụ nữ, chúc ${tenBanNu} luôn xinh đẹp, rạng rỡ và tràn ngập niềm vui.`;
@@ -112,7 +110,7 @@
             document.getElementById('envelope').style.display = 'none';
             document.getElementById('message').style.display = 'block';
 
-            // Kích hoạt hiệu ứng pháo hoa
+            // Kích hoạt pháo hoa
             var duration = 3 * 1000;
             var animationEnd = Date.now() + duration;
             var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
@@ -131,3 +129,6 @@
                 confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
             }, 250);
         }
+    </script>
+</body>
+</html>
